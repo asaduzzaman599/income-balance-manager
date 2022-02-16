@@ -21,21 +21,23 @@
 <body>
     <!-- main part  -->
     <main class="container">
-        <section >
+        <section class="mb-5">
 
             <h1 class="text-center my-5">Income Manager</h1>
-            <div class="row g-5">
+            <div class="row g-3">
                 <div class="col-md-7 col-12">
                     <!-- picture column  -->
-                    <img src="images/expense.jpg" class="img-fluid h-100" alt="">
+                    <div class="d-flex align-items-center h-100">
+                        <img src="images/expense.jpg" class="img-fluid" alt="">
+                    </div>
                 </div>
 
                 <div class="col-md-5 col-12">
                     <!-- main content column  -->
-                    <div class="main-content py-5">
+                    <div class="main-content px-2 py-5">
                         <div class="income-info  d-flex flex-column align-items-center">
                             <h3 class="mb-4">Income</h3>
-                            <p>Income: <input type="text" class="px-3 " placeholder="Your income"></p>
+                            <p class="d-flex justify-content-between "><span>income:</span> <input id="income-input" type="text" class="ms-2 px-3 " placeholder="Your income"></p>
                         </div>
 
                         <div class="expenses-info   d-flex flex-column align-items-center mb-4">
@@ -43,27 +45,27 @@
                             <!-- expense user input  -->
                             
                             <h3  class="mb-4">Expenses</h3>
-                            <div class="w-75 mx-auto mx-md-0 me-md-auto text-end">
+                            <div >
                                 
                             <!-- expense info input -->
 
-                                <p>Food: <input class="ms-2 px-2" type="text" placeholder="Food cost"></p>
-                                <p>Rent: <input class="ms-2 px-2" type="text" placeholder="Rent cost"></p>
-                                <p>Cloths: <input class="ms-2 px-2" type="text" placeholder="Cloth's cost"></p>
+                                <p class="d-flex justify-content-between px-3"><span>Food:</span> <input id="food-input" class="ms-2 px-2" type="text" placeholder="Food cost"></p>
+                                <p class="d-flex justify-content-between mx-3"><span>Rent:</span> <input id="rent-input" class="ms-2 px-2" type="text" placeholder="Rent cost"></p>
+                                <p class="d-flex justify-content-between mx-3"><span>Cloth's:</span> <input id="cloth-input" class="ms-2 px-2" type="text" placeholder="Cloth's cost"></p>
                             </div>
 
                             <!-- error message -->
-                            <p class="text-danger">Invalid input!</p>
+                            <p id="expense-error-message" class="text-danger error-message" >Invalid input. Please input valid income</p>
 
-                            <button class="btn btn-primary w-25">Calculate</button>
+                            <button id="expense-calculate-button" class="btn btn-primary w-25">Calculate</button>
                         </div>
 
                         <div class="expenses-info  d-flex flex-column align-items-center">
 
                              <!-- expense info  -->
                              
-                            <h3 class="mb-4">Total Expenses: <span>0</span></h3>
-                            <h3  class="mb-4">Balance: <span>0</span></h3>
+                            <h3 class="mb-4">Total Expenses: <span id="total-expense">0</span></h3>
+                            <h3 class="mb-4">Balance: <span id="balance" >0</span></h3>
 
                         </div>
 
@@ -74,17 +76,17 @@
                             <!-- save info input  -->
 
                             <div class="d-flex align-items-center mb-4">
-                                <p class="mt-3 me-2 w-75">Save: <input class="mx-2 w-50 px-2" type="text" placeholder="0"> % </p>
-                                <button class="btn btn-primary w-50">Save</button>
+                                <p class="mt-3 me-2 w-75">Save: <input id="saving-input" class="ms-2 me-3 w-50 px-2" type="text" placeholder="0"> % </p>
+                                <button id="saving-input-button" class="btn btn-primary w-50">Save</button>
                             </div>
                             
                             <!-- error message -->
-                            <p class="text-danger">Invalid input!</p>
+                            <p class="text-danger error-message">Invalid input!</p>
 
                             <!-- save info  -->
 
-                            <h3  class="mb-3">Saving Amount: <span>0</span></h3>
-                            <h3>Remaining Balance: <span>0</span></h3>
+                            <h3  class="mb-3">Saving Amount: <span id="saving-amount">0</span></h3>
+                            <h3>Remaining Balance: <span id="remaining -amount">0</span></h3>
                         </div>
 
                     </div>
