@@ -1,85 +1,110 @@
-function subtractionAmount(firstElementId, resultElementId, secondValue, errorID) {
-    const firstElementValue = Number(document.getElementById(firstElementId).innerText);
-    const resultElement = document.getElementById(resultElementId);
-    console.log(firstElementValue)
-    if (firstElementValue >= secondValue) {
-        resultElement.innerText = firstElementValue - secondValue;
-        document.getElementById(errorID).style.display = 'none';
-        return true;
-    } else {
-        if (errorID == "saving-error-message") {
-            displayErrorMessage(errorID, "Sorry. Balance is insufficient for saving money.")
-        }
-    }
+function getValue(elementId) {
+
+    //collect data from user input and return the value in number.
+    const InputElement = document.getElementById(elementId + "-input");
+    return Number(InputElement.value);
 }
 
 function displayErrorMessage(elementId, message) {
 
+    //disblay error message.
     const errorText = document.getElementById(elementId);
-
     errorText.innerText = message;
     errorText.style.display = 'block';
 }
+
+
 //saving-error-message
 //calculate expense 
 document.getElementById('expense-calculate-button').addEventListener('click', function () {
-    //calculate event handler
-    // const incomeAmount = getInputValues('income');
-    // const food  = getInputValues('food ');
-    // const rent  = getInputValues('rent ');
-    // const cloth  = getInputValues('cloth ');
-
-    const incomeInput = document.getElementById('income-input');
-    const incomeAmount = Number(incomeInput.value);
-
-    const foodInput = document.getElementById('food-input');
-    const foodAmount = Number(foodInput.value);
-
-    const rentInput = document.getElementById('rent-input');
-    const rentAmount = Number(rentInput.value);
-
-    const clothInput = document.getElementById('cloth-input');
-    const clothAmount = Number(clothInput.value);
-
-
-    const total = foodAmount + clothAmount + rentAmount;
-    const balance = incomeAmount - total;
-    console.log(total)
     
+    //income info
+    const incomeAmount = getValue('income');
 
-    if (balance >= 0 ) {
+    //expense info
+    const foodAmount = getValue('food');
+    const rentAmount = getValue('rent');
+    const clothAmount = getValue('cloth');
 
-        document.getElementById('total-expense').innerText = total;
-        document.getElementById('balance').innerText = balance;
-        document.getElementById('expense-error-message').style.display = 'none';
+
+    if(incomeAmount>=0){
+        if(foodAmount >=0 && rentAmount >=0 && clothAmount >=0 ){
+
+            const total = foodAmount + clothAmount + rentAmount;
+            const balance = incomeAmount - total;
+                
+            if (balance >= 0) {
+                
+            //condition check then calculate then display balance and total expense     
+                document.getElementById('total-expense').innerText = total;
+                document.getElementById('balance').innerText = balance;
+
+                //removed all expense and income error after successfully input.
+                document.getElementById('expense-error-message').style.display = 'none';
+
+            } else {
+                
+                //error for expense more than income.
+                displayErrorMessage('expense-error-message', "Sorry. income is insufficient for expense.")
+            }
+        }else if(isNaN(foodAmount) || isNaN(rentAmount) || isNaN(clothAmount)){
+
+            //error for expense info input not a number.
+            displayErrorMessage('expense-error-message', "Sorry. invalid input for expense.");
+        }else{
+
+            //error for expense info negative input number.
+            displayErrorMessage('expense-error-message', "Please enter positive number for expense.");
+        }
+    }else if(isNaN(incomeAmount)){
+
+        //error for income  input not a number.
+        displayErrorMessage('expense-error-message', "Sorry. invalid input for income.");
     }else{
-        displayErrorMessage('expense-error-message', "Sorry. income is insufficient for expense.")
-    }
 
-    //income input data
+        //error for income negative input number.
+        displayErrorMessage('expense-error-message', "Please enter positive number for income.");
+    }
 });
+
 
 document.getElementById('saving-input-button').addEventListener('click', function () {
-    const savingInput = document.getElementById('saving-input');
-    const savingPercentage = Number(savingInput.value);
-    const balanceValue = document.getElementById('balance').innerText
-    const balance = Number(balanceValue);
+    //savings data
+    const savingPercentage = getValue('saving');
+    if(savingPercentage >= 0){
 
-    const incomeInput = document.getElementById('income-input');
-    const incomeAmount = Number(incomeInput.value);
+        //collecting balance amount from ui
+        const balanceValue = document.getElementById('balance').innerText
+        const balance = Number(balanceValue);
+        
+        //income amount
+        const incomeAmount = getValue('income');
+    
+    
+        const savingAmount = incomeAmount / 100 * savingPercentage;
+        const remainingBalance = balance - savingAmount;
+    
+    
+        if (remainingBalance >= 0) {
+            //calculate then condition check then display saving amount , remaining amount.
+            document.getElementById('saving-amount').innerText = savingAmount;
+            document.getElementById('remaining-amount').innerText = remainingBalance;
 
+            
+                //removed all saving error after successfully input.
+            document.getElementById('saving-error-message').style.display = 'none';
+        } else {
 
-    const savingAmount = incomeAmount / 100 * savingPercentage;
-    const remainingBalance = balance - savingAmount;
+            //error for savings more than balance.
+            displayErrorMessage('saving-error-message', "Sorry. Balance is insufficient for saving money.")
+        }
+    }else if(isNaN(savingPercentage)){
 
-
-    if (remainingBalance >= 0 ) {
-        document.getElementById('saving-amount').innerText = savingAmount;
-        document.getElementById('remaining-amount').innerText = remainingBalance;
-        document.getElementById('saving-error-message').style.display = 'none';
+        //error for saving-percentage  input not a number.
+        displayErrorMessage('expense-error-message', "Sorry. invalid input for saving.");
     }else{
-        displayErrorMessage('saving-error-message', "Sorry. Balance is insufficient for saving money.")
+        
+        //error for saving-percentage  negative input number.
+        displayErrorMessage('expense-error-message', "Please enter positive number for saving.");
     }
-    // console.log(savingAmount);
 });
-
