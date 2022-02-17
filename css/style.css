@@ -48,3 +48,11 @@ button{
 .main-content{
     background: #F8F8F8;
 }
+
+/* for mobile  */
+@media screen and (max-width: 600px)  {
+    h1{
+        font-size: 30px; 
+    }
+    
+}
