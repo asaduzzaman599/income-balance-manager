@@ -13,6 +13,7 @@ body{
     font-weight: 400;
 }
 
+/* style for heading  */
 h1{
     font-size: 48px;
     font-family: 'Manrope', sans-serif;
@@ -24,7 +25,7 @@ h3{
     font-weight: 600;
     font-size: 22px;    
 }
-
+/* style for input */
 input{
     border:0;
     background: #DCDCDC;
@@ -33,7 +34,6 @@ input{
 
 button{
     font-family: Roboto;
-    font-weight: 700;
     font-size: 20px;
     line-height: 23px;
 }
