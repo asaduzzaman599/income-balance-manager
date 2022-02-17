@@ -21,6 +21,10 @@ function displaySavingInfo(savingAmount, remainingBalance) {
     document.getElementById("saving-input").value = '';
     document.getElementById('saving-amount').innerText = parseFloat(savingAmount.toFixed(3));
     document.getElementById('remaining-amount').innerText = parseFloat(remainingBalance.toFixed(3));
+
+    
+            //removed all saving error after successfully input.
+            document.getElementById('saving-error-message').style.display = 'none';
 }
 
 //saving-error-message
@@ -102,8 +106,6 @@ document.getElementById('saving-input-button').addEventListener('click', functio
             displaySavingInfo(savingAmount, remainingBalance);
 
 
-            //removed all saving error after successfully input.
-            document.getElementById('saving-error-message').style.display = 'none';
         } else {
 
             //error for savings more than balance.
